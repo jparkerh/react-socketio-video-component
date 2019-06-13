@@ -8,6 +8,7 @@ from tornado.options import define, options, parse_command_line
 import tornado.web
 
 import socketio
+import socket
 
 import cv2
 cap = cv2.VideoCapture(0)
@@ -46,6 +47,14 @@ async def connect(sid, envr):
     await sio.emit('connected')
 
 def main():
+
+    try: 
+        host_name = socket.gethostname() 
+        host_ip = socket.gethostbyname(host_name) 
+        print("Hostname :  ",host_name) 
+        print("IP : ",host_ip) 
+    except: 
+        print("Unable to get Hostname and IP") 
 
     parse_command_line()
     app = tornado.web.Application(

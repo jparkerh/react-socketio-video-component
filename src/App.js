@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
 import './App.css';
 
-const socket = socketIOClient('http://localhost:8080');
-
 class ImgSocket extends Component {
 
   constructor (props) {
@@ -38,6 +36,13 @@ class App extends Component {
 
   constructor() {
     super();
+
+    var str = window.location.host;
+    var res = str.substring(0, str.length-4);
+    console.log(res);
+
+    const socket = socketIOClient('http://' + res + '8080');
+
     this.state = {
       response: "hello, demo",
       response1: "don't change this"
